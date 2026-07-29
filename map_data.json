@@ -1,0 +1,17 @@
+{
+  "nodes": [
+    {"id": "Library", "x": 100, "y": 120},
+    {"id": "Hostel", "x": 100, "y": 380},
+    {"id": "Canteen", "x": 350, "y": 120},
+    {"id": "Auditorium", "x": 350, "y": 380},
+    {"id": "Lab", "x": 600, "y": 250}
+  ],
+  "edges": [
+    {"u": "Library", "v": "Canteen", "weight": 200, "closed": false},
+    {"u": "Library", "v": "Hostel", "weight": 150, "closed": false},
+    {"u": "Hostel", "v": "Auditorium", "weight": 100, "closed": false},
+    {"u": "Canteen", "v": "Auditorium", "weight": 80, "closed": false},
+    {"u": "Canteen", "v": "Lab", "weight": 300, "closed": false},
+    {"u": "Auditorium", "v": "Lab", "weight": 120, "closed": false}
+  ]
+}

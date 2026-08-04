@@ -1,17 +1,42 @@
 {
   "nodes": [
-    {"id": "Library", "x": 100, "y": 120},
-    {"id": "Hostel", "x": 100, "y": 380},
-    {"id": "Canteen", "x": 350, "y": 120},
-    {"id": "Auditorium", "x": 350, "y": 380},
-    {"id": "Lab", "x": 600, "y": 250}
+    {"id": "Main Gate", "x": 100, "y": 100},
+    {"id": "Health Center", "x": 100, "y": 250},
+    {"id": "Dining Hall", "x": 100, "y": 400},
+    {"id": "Dormitory", "x": 100, "y": 550},
+    {"id": "Admin Building", "x": 300, "y": 100},
+    {"id": "Library", "x": 300, "y": 250},
+    {"id": "Student Union", "x": 300, "y": 400},
+    {"id": "Sports Complex", "x": 300, "y": 550},
+    {"id": "Lecture Hall", "x": 550, "y": 100},
+    {"id": "Engineering Block", "x": 550, "y": 250},
+    {"id": "Research Lab", "x": 550, "y": 400},
+    {"id": "Exam Hall", "x": 550, "y": 550},
+    {"id": "Campus Park", "x": 750, "y": 180},
+    {"id": "Tennis Courts", "x": 750, "y": 480}
   ],
   "edges": [
-    {"u": "Library", "v": "Canteen", "weight": 200, "closed": false},
-    {"u": "Library", "v": "Hostel", "weight": 150, "closed": false},
-    {"u": "Hostel", "v": "Auditorium", "weight": 100, "closed": false},
-    {"u": "Canteen", "v": "Auditorium", "weight": 80, "closed": false},
-    {"u": "Canteen", "v": "Lab", "weight": 300, "closed": false},
-    {"u": "Auditorium", "v": "Lab", "weight": 120, "closed": false}
+    {"u": "Main Gate", "v": "Admin Building", "weight": 120, "closed": false},
+    {"u": "Main Gate", "v": "Health Center", "weight": 100, "closed": false},
+    {"u": "Admin Building", "v": "Library", "weight": 90, "closed": false},
+    {"u": "Health Center", "v": "Library", "weight": 110, "closed": false},
+    {"u": "Health Center", "v": "Dining Hall", "weight": 130, "closed": false},
+    {"u": "Dining Hall", "v": "Dormitory", "weight": 150, "closed": false},
+    {"u": "Dining Hall", "v": "Student Union", "weight": 100, "closed": false},
+    {"u": "Dormitory", "v": "Sports Complex", "weight": 180, "closed": false},
+    {"u": "Student Union", "v": "Sports Complex", "weight": 120, "closed": false},
+    {"u": "Admin Building", "v": "Lecture Hall", "weight": 160, "closed": false},
+    {"u": "Library", "v": "Lecture Hall", "weight": 140, "closed": false},
+    {"u": "Library", "v": "Engineering Block", "weight": 130, "closed": false},
+    {"u": "Student Union", "v": "Engineering Block", "weight": 150, "closed": true,"status": "under_construction", "detour_info": "detour Research Lab (+80m)"},
+    {"u": "Student Union", "v": "Research Lab", "weight": 140, "closed": false},
+    {"u": "Sports Complex", "v": "Exam Hall", "weight": 160, "closed": false},
+    {"u": "Lecture Hall", "v": "Engineering Block", "weight": 100, "closed": false},
+    {"u": "Engineering Block", "v": "Research Lab", "weight": 90, "closed": false},
+    {"u": "Research Lab", "v": "Exam Hall", "weight": 110, "closed": false},
+    {"u": "Lecture Hall", "v": "Campus Park", "weight": 150, "closed": false},
+    {"u": "Engineering Block", "v": "Campus Park", "weight": 120, "closed": false},
+    {"u": "Research Lab", "v": "Tennis Courts", "weight": 130, "closed": false},
+    {"u": "Exam Hall", "v": "Tennis Courts", "weight": 110, "closed": false}
   ]
 }

@@ -2,7 +2,7 @@ import math
 import tkinter as tk
 from tkinter import ttk, messagebox
 
-from graph_logic import Graph
+from graph_logic import Graph, calculate_walk_time
 from map_loader import load_graph_from_json
 
 class CampusMapApp:
@@ -29,7 +29,7 @@ class CampusMapApp:
         if node_list:
             self.start_combo.set(node_list[0])
         
-        # 2. Middle Stop (Via) Dropdown [NEW!]
+        # 2. Middle Stop (Via) Dropdown
         tk.Label(control_frame, text="Via (Optional):", bg="#f0f0f0").grid(row=0, column=2, padx=3)
         self.via_var = tk.StringVar()
         via_options = ["None"] + node_list  # Allows user to skip middle stop
@@ -122,7 +122,7 @@ class CampusMapApp:
                 self.find_and_draw_route()
 
     def find_and_draw_route(self):
-        """Calculates multi-leg shortest path when a middle stop is chosen."""
+        """Calculates multi-leg shortest path and updates canvas display."""
         start = self.start_var.get()
         via = self.via_var.get()
         end = self.end_var.get()
@@ -145,13 +145,16 @@ class CampusMapApp:
                 return
                 
             dist = dist1 + dist2
-            path = path1 + path2[1:]  # path2[1:] prevents repeating the middle stop name
+            path = path1 + path2[1:]  # Avoid repeating the middle stop name
         else:
             # Direct Navigation: Start -> End
             dist, path = self.graph.dijkstra(start, end)
             if dist == float('inf') or not path:
                 self.result_label.config(text="No path exists between selected points!", fg="red")
                 return
+
+        # Calculate Walk Time in Minutes
+        walk_mins = calculate_walk_time(dist)
 
         # Check Detour Warnings
         warnings = []
@@ -162,7 +165,8 @@ class CampusMapApp:
                 info = edge.get("detour_info", "Detour active")
                 warnings.append(f"⚠️ [{edge['u']} ↔ {edge['v']} ({status})]: {info}")
 
-        result_msg = f"Total Distance: {dist} meters | Route: {' -> '.join(path)}"
+        # Display Total Distance + Walk Time
+        result_msg = f"Total Distance: {dist} meters (~{walk_mins} min walk) | Route: {' -> '.join(path)}"
         if warnings:
             result_msg += "\n" + "\n".join(warnings)
             self.result_label.config(text=result_msg, fg="#d32f2f")

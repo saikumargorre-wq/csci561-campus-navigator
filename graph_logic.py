@@ -75,6 +75,18 @@ class Graph:
         return distances[target_node], path
 
 
+def calculate_walk_time(distance_meters, speed_m_per_s=1.4):
+    """
+    Calculates walking time in minutes based on distance in meters.
+    Default walking speed is 1.4 m/s (~0.71 seconds per meter).
+    """
+    if distance_meters == float('inf') or distance_meters == 0:
+        return 0
+    seconds = distance_meters / speed_m_per_s
+    minutes = round(seconds / 60)
+    return max(1, minutes)  # Minimum 1 minute for short distances
+
+
 # ==========================================
 # QUICK TEST EXAMPLE
 # ==========================================
@@ -100,6 +112,7 @@ if __name__ == "__main__":
     start = "Library"
     end = "Lab"
     total_dist, shortest_path = campus_map.dijkstra(start, end)
+    walk_mins = calculate_walk_time(total_dist)
 
-    print(f"Shortest distance from {start} to {end}: {total_dist} meters")
+    print(f"Shortest distance from {start} to {end}: {total_dist} meters (~{walk_mins} min walk)")
     print(f"Route: {' -> '.join(shortest_path)}")
